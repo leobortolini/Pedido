@@ -20,11 +20,10 @@ class ListarPedidoUsecaseTest {
     @InjectMocks
     private ListarPedidoUsecase listarPedidoUsecase;
 
-    private final Long pedidoId = 1L;
-
     @Test
     void deveRetornarPedidoQuandoExistir() {
         Pedido pedidoMock = new Pedido();
+        Long pedidoId = 1L;
         pedidoMock.setId(pedidoId);
 
         when(pedidoGateway.getPedido(pedidoId)).thenReturn(pedidoMock);

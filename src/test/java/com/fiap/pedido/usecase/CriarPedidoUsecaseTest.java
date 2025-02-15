@@ -36,7 +36,6 @@ class CriarPedidoUsecaseTest {
     private CriarPedidoUsecase criarPedidoUsecase;
 
     private Cliente cliente;
-    private Produto produto;
     private List<Produto> itens;
 
     @BeforeEach
@@ -44,18 +43,12 @@ class CriarPedidoUsecaseTest {
         cliente = new Cliente();
         cliente.setCpf("12345678900");
 
-        produto = new Produto();
+        Produto produto = new Produto();
         itens = Collections.singletonList(produto);
     }
 
     @Test
     void deveCriarPedidoComSucesso() {
-        Pedido pedidoEsperado = new Pedido();
-        pedidoEsperado.setId(1L);
-        pedidoEsperado.setCliente(cliente);
-        pedidoEsperado.setProdutoList(itens);
-        pedidoEsperado.setStatus(Pedido.Status.PENDENTE_ESTOQUE);
-
         when(clienteGateway.buscarCliente(cliente.getCpf())).thenReturn(cliente);
         when(pedidoGateway.criarPedido(any(Pedido.class))).thenReturn(1L);
         when(produtoGateway.enviarReservaProduto(any(Pedido.class))).thenReturn(true);

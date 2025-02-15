@@ -19,6 +19,6 @@ public class Pagamento {
     public enum Status {
         PENDENTE,
         FINALIZADO,
-        RECUSADO;
+        RECUSADO
     }
 }

@@ -56,8 +56,6 @@ class ClienteGatewayHttpImplTest {
     @Test
     void deveRetornarNullQuandoExcecaoForLancada() {
         String cpf = "12345678900";
-        ResponseEntity<Cliente> responseEntity = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
         when(restTemplate.getForEntity(anyString(), eq(Cliente.class)))
                 .thenThrow(HttpClientErrorException.NotFound.class);
 

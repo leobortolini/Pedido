@@ -23,6 +23,6 @@ public class Pedido {
         PENDENTE_ENVIAR_EXPEDICAO,
         ENVIADO_EXPEDICAO,
         EM_ENTREGA,
-        FINALIZADO;
+        FINALIZADO
     }
 }
