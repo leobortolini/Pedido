@@ -2,7 +2,6 @@ package com.fiap.pedido.usecase;
 
 import com.fiap.pedido.domain.Pedido;
 import com.fiap.pedido.domain.Produto;
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -20,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 @AutoConfigureTestDatabase
-@Transactional
 @EnableTestBinder
 @EnableWireMock({@ConfigureWireMock(port = 8080, httpsPort = 0)})
 class CriarPedidoUsecaseIT {

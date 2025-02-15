@@ -2,7 +2,6 @@ package com.fiap.pedido.usecase;
 
 import com.fiap.pedido.domain.Pedido;
 import com.fiap.pedido.gateway.PedidoGateway;
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -14,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @AutoConfigureTestDatabase
-@Transactional
 class ProcessarRespostaLogisticaUsecaseIT {
 
     @Autowired

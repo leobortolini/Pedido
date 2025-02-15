@@ -4,18 +4,15 @@ import com.fiap.pedido.domain.Cliente;
 import com.fiap.pedido.domain.Pagamento;
 import com.fiap.pedido.domain.Pedido;
 import com.fiap.pedido.domain.Produto;
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @AutoConfigureTestDatabase
-@Transactional
 public class ListarPedidoUsecaseIT {
 
     @Autowired
