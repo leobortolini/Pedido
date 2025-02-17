@@ -41,7 +41,6 @@ public class DefinicaoPassos {
     @Autowired
     private ObjectMapper objectMapper;
 
-
     @Quando("criar novo pedido")
     @Dado("que exista um pedido")
     public void criarNovoPedido() {
@@ -80,6 +79,17 @@ public class DefinicaoPassos {
         boolean send = streamBridge.send("estoque-resposta-dlx", mensagemJson);
 
         assertTrue(send, "A mensagem não foi enviada corretamente");
+
+        esperarSistemaConsumirEvento();
+    }
+
+    private static void esperarSistemaConsumirEvento() {
+        try {
+            Thread.sleep(1000); // para esperar o sistema consumir o evento
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("Thread interrompida durante o sleep", e);
+        }
     }
 
     @Entao("o pedido deve aguardar pagamento")
@@ -164,6 +174,7 @@ public class DefinicaoPassos {
         boolean send = streamBridge.send("atualiza-status-dlx", mensagemJson);
 
         assertTrue(send, "A mensagem não foi enviada corretamente");
+        esperarSistemaConsumirEvento();
     }
 
     @Entao("o pedido deve ser atualizado")
