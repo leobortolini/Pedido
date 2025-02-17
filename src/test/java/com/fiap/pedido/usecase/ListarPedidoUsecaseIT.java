@@ -13,13 +13,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @AutoConfigureTestDatabase
-public class ListarPedidoUsecaseIT {
+class ListarPedidoUsecaseIT {
 
     @Autowired
     private ListarPedidoUsecase listarPedidoUsecase;
 
     @Test
-    @Sql(scripts = "/pedido_finalizado.sql")
+    @Sql(scripts = { "/limpar_dados.sql", "/pedido_finalizado.sql" })
     void deveRetornarPedido() {
         Pedido pedido = listarPedidoUsecase.getPedido(1L);
 

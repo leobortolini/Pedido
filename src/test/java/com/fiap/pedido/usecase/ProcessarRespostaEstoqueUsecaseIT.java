@@ -23,7 +23,7 @@ class ProcessarRespostaEstoqueUsecaseIT {
     private PedidoGateway pedidoGateway;
 
     @Test
-    @Sql(scripts = "/pedido_pendente_estoque.sql")
+    @Sql(scripts = { "/limpar_dados.sql", "/pedido_pendente_estoque.sql" })
     void deveAtualizarStatusDoPedidoParaPagamento() {
         processarRespostaEstoqueUsecase.processarRespostaEstoque(1L, true);
 
@@ -32,7 +32,7 @@ class ProcessarRespostaEstoqueUsecaseIT {
     }
 
     @Test
-    @Sql(scripts = "/pedido_pendente_estoque.sql")
+    @Sql(scripts = { "/limpar_dados.sql", "/pedido_pendente_estoque.sql"})
     void deveAtualizarStatusDoPedidoParaSemEstoque() {
         processarRespostaEstoqueUsecase.processarRespostaEstoque(1L, false);
 

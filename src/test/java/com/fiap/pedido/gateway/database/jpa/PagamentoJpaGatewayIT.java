@@ -22,7 +22,7 @@ class PagamentoJpaGatewayIT {
     private PagamentoJpaGateway pagamentoJpaGateway;
 
     @Test
-    @Sql(scripts = "/pedido_pendente_criar_pagamento.sql")
+    @Sql(scripts = { "/limpar_dados.sql", "/pedido_pendente_criar_pagamento.sql" })
     void deveCriarPagamento() {
         Pagamento pagamento = new Pagamento();
 
@@ -34,7 +34,7 @@ class PagamentoJpaGatewayIT {
     }
 
     @Test
-    @Sql(scripts = "/pedido_finalizado.sql")
+    @Sql(scripts = { "/limpar_dados.sql", "/pedido_finalizado.sql" })
     void deveRetornarStatusDoPagamento() {
         Pagamento.Status status = pagamentoJpaGateway.getPagamentoStatus(1L);
 
@@ -42,7 +42,7 @@ class PagamentoJpaGatewayIT {
     }
 
     @Test
-    @Sql(scripts = "/pedido_finalizado.sql")
+    @Sql(scripts = { "/limpar_dados.sql", "/pedido_finalizado.sql" })
     void deveRetornarIdDoPedidoDoPagamento() {
         Long pedidoId = pagamentoJpaGateway.getPedidoIdDoPagamento(1L);
 
@@ -50,7 +50,7 @@ class PagamentoJpaGatewayIT {
     }
 
     @Test
-    @Sql(scripts = "/pedido_pendente_finalizar_pagamento.sql")
+    @Sql(scripts = {"/limpar_dados.sql", "/pedido_pendente_finalizar_pagamento.sql" })
     void deveAtualizarStatusDoPagamento() {
         Pagamento pagamento = new Pagamento();
         

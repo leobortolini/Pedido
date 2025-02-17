@@ -19,11 +19,12 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @AutoConfigureTestDatabase
 @Transactional
-public class PedidoJpaGatewayIT {
+class PedidoJpaGatewayIT {
     @Autowired
     private PedidoJpaGateway pedidoJpaGateway;
 
     @Test
+    @Sql(scripts = "/limpar_dados.sql")
     void deveCriarPedido() {
         Pedido pedido = new Pedido();
 
@@ -43,7 +44,7 @@ public class PedidoJpaGatewayIT {
     }
 
     @Test
-    @Sql(scripts = "/pedido_pendente_estoque.sql")
+    @Sql(scripts = { "/limpar_dados.sql", "/pedido_pendente_estoque.sql" })
     void deveAtualizarStatusDoPedido() {
         Pedido pedido = new Pedido();
 
@@ -56,7 +57,7 @@ public class PedidoJpaGatewayIT {
     }
 
     @Test
-    @Sql(scripts = "/pedido_pendente_criar_pagamento.sql")
+    @Sql(scripts = { "/limpar_dados.sql", "/pedido_pendente_criar_pagamento.sql" })
     void deveRetornarValorDoPedido() {
         BigDecimal valorPedido = pedidoJpaGateway.getValorPedido(1L);
 
@@ -64,7 +65,7 @@ public class PedidoJpaGatewayIT {
     }
 
     @Test
-    @Sql(scripts = "/pedido_finalizado.sql")
+    @Sql(scripts = { "/limpar_dados.sql", "/pedido_finalizado.sql" })
     void deveRetornarStatusDoPedido() {
         Pedido.Status pedidoStatus = pedidoJpaGateway.getPedidoStatus(1L);
 
@@ -72,7 +73,7 @@ public class PedidoJpaGatewayIT {
     }
 
     @Test
-    @Sql(scripts = "/pedido_finalizado.sql")
+    @Sql(scripts = {"/limpar_dados.sql", "/pedido_finalizado.sql"})
     void deveRetornarClienteDoPedido() {
         Cliente cliente = pedidoJpaGateway.getCliente(1L);
 
@@ -81,7 +82,7 @@ public class PedidoJpaGatewayIT {
     }
 
     @Test
-    @Sql(scripts = "/pedido_finalizado.sql")
+    @Sql(scripts = { "/limpar_dados.sql", "/pedido_finalizado.sql" })
     void deveRetornarPedido() {
         Pedido pedido = pedidoJpaGateway.getPedido(1L);
 

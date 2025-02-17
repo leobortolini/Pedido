@@ -13,9 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest
-@EnableWireMock({@ConfigureWireMock(port = 8080, httpsPort = 0)})
+@EnableWireMock({@ConfigureWireMock(port = 9191, httpsPort = 0)})
 class ClienteGatewayHttpImplIT {
-
 
     @Autowired
     private ClienteGatewayHttpImpl clienteGatewayHttp;

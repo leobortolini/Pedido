@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest
 @AutoConfigureTestDatabase
 @EnableTestBinder
-@EnableWireMock({@ConfigureWireMock(port = 8080, httpsPort = 0)})
+@EnableWireMock({@ConfigureWireMock(port = 9191, httpsPort = 0)})
 class CriarPedidoUsecaseIT {
 
     @Autowired
