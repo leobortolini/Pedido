@@ -86,7 +86,12 @@ public class DefinicaoPassos {
     }
 
     private static void esperarSistemaConsumirEvento() {
-        await().atMost(1, SECONDS).until(() -> false); // para esperar o sistema consumir o evento
+        try {
+            Thread.sleep(1000); // para esperar o sistema consumir o evento
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("Thread interrompida durante o sleep", e);
+        }
     }
 
     @Entao("o pedido deve aguardar pagamento")

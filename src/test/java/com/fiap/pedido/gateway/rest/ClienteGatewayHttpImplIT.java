@@ -21,7 +21,7 @@ class ClienteGatewayHttpImplIT {
 
     @Test
     void deveRetornarCliente() {
-        String url = String.format("/api/vi/clientes/%s", "000.000.000-00");
+        String url = String.format("/api/v1/clientes/%s", "000.000.000-00");
         String clienteJson = """
                 {
                     "cpf": "000.000.000-00",

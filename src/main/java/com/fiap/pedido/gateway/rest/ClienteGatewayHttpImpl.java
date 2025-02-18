@@ -3,15 +3,16 @@ package com.fiap.pedido.gateway.rest;
 import com.fiap.pedido.domain.Cliente;
 import com.fiap.pedido.gateway.ClienteGateway;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class ClienteGatewayHttpImpl implements ClienteGateway {
 
     private final RestTemplate restTemplate;
@@ -31,7 +32,8 @@ public class ClienteGatewayHttpImpl implements ClienteGateway {
             }
 
             return clienteResponseEntity.getBody();
-        } catch (HttpClientErrorException.NotFound e) {
+        } catch (Exception e) {
+            log.error("Erro ao buscar cliente: ", e);
             return null;
         }
     }
