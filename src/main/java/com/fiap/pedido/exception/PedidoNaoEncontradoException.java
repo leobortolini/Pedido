@@ -4,18 +4,18 @@ import lombok.Getter;
 
 @Getter
 public class PedidoNaoEncontradoException extends RuntimeException {
-    private static final String code = "pedido-service.pedidoNaoEncontrado";
-    private static final String message = "Pedido nao encontrado";
-    private static final Integer httpStatus = 404;
+    private static final String CODE = "pedido-service.pedidoNaoEncontrado";
+    private static final String MESSAGE = "Pedido nao encontrado";
+    private static final Integer HTTPSTATUS = 404;
 
     public int getHttpStatus() {
-      return httpStatus;
+      return HTTPSTATUS;
     }
 
     public String getCode(){
-      return code;
+      return CODE;
     }
 
     @Override
-    public String getMessage() { return message; }
+    public String getMessage() { return MESSAGE; }
 }

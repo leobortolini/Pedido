@@ -4,18 +4,18 @@ import lombok.Getter;
 
 @Getter
 public class PagamentoComStatusInvalidoException extends RuntimeException {
-    private static final String code = "pedido-service.pagamentoComStatusInvalido";
-    private static final String message = "Pagamento com status invalido para ser finalizado";
-    private static final Integer httpStatus = 400;
+    private static final String CODE = "pedido-service.pagamentoComStatusInvalido";
+    private static final String MESSAGE = "Pagamento com status invalido para ser finalizado";
+    private static final Integer HTTPSTATUS = 400;
 
     public int getHttpStatus() {
-        return httpStatus;
+        return HTTPSTATUS;
     }
 
     public String getCode(){
-        return code;
+        return CODE;
     }
 
     @Override
-    public String getMessage() { return message; }
+    public String getMessage() { return MESSAGE; }
 }

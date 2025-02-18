@@ -1,21 +1,19 @@
 package com.fiap.pedido.exception;
 
-import lombok.Getter;
-
 public class PedidoComStatusInvalidoParaPagamentoException extends RuntimeException {
-    private static final String code = "pedido-service.erroAoCriarPagamento";
-    private static final String message = "Pedido com status invalido para realizar pagamento";
-    private static final Integer httpStatus = 400;
+    private static final String CODE = "pedido-service.erroAoCriarPagamento";
+    private static final String MESSAGE = "Pedido com status invalido para realizar pagamento";
+    private static final Integer HTTPSTATUS = 400;
 
     public int getHttpStatus() {
-        return httpStatus;
+        return HTTPSTATUS;
     }
 
     public String getCode(){
-        return code;
+        return CODE;
     }
 
     @Override
-    public String getMessage() { return message; }
+    public String getMessage() { return MESSAGE; }
 
 }
