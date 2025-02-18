@@ -67,13 +67,15 @@ class CriarPedidoUsecaseTest {
 
     @Test
     void deveLancarExcecaoQuandoClienteNaoEncontrado() {
-        when(clienteGateway.buscarCliente(cliente.getCpf())).thenReturn(null);
+        String cpf = cliente.getCpf();
+
+        when(clienteGateway.buscarCliente(cpf)).thenReturn(null);
 
         assertThrows(ClienteNaoEncontradoException.class, () ->
-                criarPedidoUsecase.criarPedido(cliente.getCpf(), itens)
+                criarPedidoUsecase.criarPedido(cpf, itens)
         );
 
-        verify(clienteGateway).buscarCliente(cliente.getCpf());
+        verify(clienteGateway).buscarCliente(cpf);
         verifyNoInteractions(pedidoGateway);
         verifyNoInteractions(produtoGateway);
     }

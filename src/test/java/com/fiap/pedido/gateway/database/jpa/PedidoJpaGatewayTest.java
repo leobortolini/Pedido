@@ -152,10 +152,10 @@ class PedidoJpaGatewayTest {
         pedidoEntity.setCliente(clienteEntity);
         when(pedidoEntityRepository.getReferenceById(pedido.getId())).thenReturn(pedidoEntity);
 
-        Cliente cliente = pedidoJpaGateway.getCliente(pedido.getId());
+        Cliente clienteRetornado = pedidoJpaGateway.getCliente(pedido.getId());
 
-        assertNotNull(cliente);
-        assertEquals("12345678900", cliente.getCpf());
+        assertNotNull(clienteRetornado);
+        assertEquals("12345678900", clienteRetornado.getCpf());
     }
 
     @Test

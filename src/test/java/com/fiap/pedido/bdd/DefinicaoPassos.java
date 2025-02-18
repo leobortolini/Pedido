@@ -25,13 +25,15 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Slf4j
 public class DefinicaoPassos {
 
-    private final String ENDPOINT = "http://localhost:8081/api/v1/pedido";
+    private final String endpoint = "http://localhost:8081/api/v1/pedido";
     private Pedido pedido;
     private Pagamento pagamento;
 
@@ -49,7 +51,7 @@ public class DefinicaoPassos {
         criarPedidoJson.setCpf("000.000.000-09");
         criarPedidoJson.setItens(List.of(new Produto(1L, BigDecimal.TEN, 1)));
 
-        Response response = given().contentType(MediaType.APPLICATION_JSON_VALUE).body(criarPedidoJson).when().post(ENDPOINT);
+        Response response = given().contentType(MediaType.APPLICATION_JSON_VALUE).body(criarPedidoJson).when().post(endpoint);
         pedido = response.then().extract().as(Pedido.class);
     }
 
@@ -84,12 +86,7 @@ public class DefinicaoPassos {
     }
 
     private static void esperarSistemaConsumirEvento() {
-        try {
-            Thread.sleep(1000); // para esperar o sistema consumir o evento
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            throw new RuntimeException("Thread interrompida durante o sleep", e);
-        }
+        await().atMost(1, SECONDS).until(() -> false); // para esperar o sistema consumir o evento
     }
 
     @Entao("o pedido deve aguardar pagamento")
@@ -100,7 +97,7 @@ public class DefinicaoPassos {
     }
 
     private void listarPedido() {
-        Response response = given().contentType(MediaType.APPLICATION_JSON_VALUE).when().get(ENDPOINT + "/" + pedido.getId());
+        Response response = given().contentType(MediaType.APPLICATION_JSON_VALUE).when().get(endpoint + "/" + pedido.getId());
 
         pedido = response.then().extract().as(Pedido.class);
     }
@@ -115,7 +112,7 @@ public class DefinicaoPassos {
     public void clienteIniciaPagamentoPedido() {
         CriarPagamentoJson criarPagamentoJson = new CriarPagamentoJson(pedido.getId());
         Response response = given().contentType(MediaType.APPLICATION_JSON_VALUE).body(criarPagamentoJson).when()
-                .post(ENDPOINT + "/iniciarPagamento");
+                .post(endpoint + "/iniciarPagamento");
 
         pagamento = response.then().extract().as(Pagamento.class);
     }
@@ -135,7 +132,7 @@ public class DefinicaoPassos {
     public void completarOPagamento() {
         CompletarPagamentoJson criarPagamentoJson = new CompletarPagamentoJson(pagamento.getId());
         Response response = given().contentType(MediaType.APPLICATION_JSON_VALUE).body(criarPagamentoJson).when()
-                .post(ENDPOINT + "/completarPagamento");
+                .post(endpoint + "/completarPagamento");
         pagamento = response.then().extract().as(Pagamento.class);
     }
 

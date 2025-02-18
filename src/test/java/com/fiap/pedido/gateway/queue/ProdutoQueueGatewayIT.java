@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @EnableTestBinder
-public class ProdutoQueueGatewayIT {
+class ProdutoQueueGatewayIT {
 
     @Autowired
     private ProdutoQueueGateway produtoQueueGateway;
