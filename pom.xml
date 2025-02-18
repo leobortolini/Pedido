@@ -131,15 +131,6 @@
 			<artifactId>cucumber-spring</artifactId>
 			<version>7.21.1</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.awaitility/awaitility -->
-		<dependency>
-			<groupId>org.awaitility</groupId>
-			<artifactId>awaitility</artifactId>
-			<version>4.2.2</version>
-			<scope>test</scope>
-		</dependency>
-
-
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
