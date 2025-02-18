@@ -21,7 +21,7 @@ class ClienteGatewayHttpImplIT {
 
     @Test
     void deveRetornarCliente() {
-        String url = String.format("/api/vi/clientes?cpf=%s", "000.000.000-00");
+        String url = String.format("/api/vi/clientes/%s", "000.000.000-00");
         String clienteJson = """
                 {
                     "cpf": "000.000.000-00",
@@ -42,7 +42,7 @@ class ClienteGatewayHttpImplIT {
 
     @Test
     void deveRetornarNullQuandoNaoEncontrarCliente() {
-        String url = String.format("/api/vi/clientes?cpf=%s", "000.000.000-00");
+        String url = String.format("/api/vi/clientes/%s", "000.000.000-00");
         stubFor(get(urlEqualTo(url)).willReturn(notFound().withHeader("Content-Type", "application/json")));
 
         Cliente cliente = clienteGatewayHttp.buscarCliente("000.000.000-00");

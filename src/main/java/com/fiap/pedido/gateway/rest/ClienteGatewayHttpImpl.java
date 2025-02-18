@@ -21,7 +21,7 @@ public class ClienteGatewayHttpImpl implements ClienteGateway {
 
     @Override
     public Cliente buscarCliente(String cpf) {
-        String url = String.format("%s/%s?cpf=%s", clienteGatewayUrl, "api/vi/clientes",cpf);
+        String url = String.format("%s/%s/%s", clienteGatewayUrl, "api/v1/clientes",cpf);
 
         try {
             ResponseEntity<Cliente> clienteResponseEntity = restTemplate.getForEntity(url, Cliente.class);
