@@ -24,7 +24,7 @@ public class ProcessarRespostaEstoqueUsecase {
             pedidoStatus = pedidoGateway.getPedidoStatus(pedidoId);
         } catch (PedidoNaoEncontradoException e) {
             log.error("Estoque enviou resposta para o pedido {} mas nao foi encontrado", pedidoId);
-            return;
+            throw e;
         }
 
         if (pedidoStatus == Pedido.Status.ENVIADO_PEDIDO_ESTOQUE) {
