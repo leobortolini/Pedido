@@ -21,7 +21,7 @@ class EfetuarPagamentoUsecaseIT {
     private EfetuarPagamentoUsecase efetuarPagamentoUsecase;
 
     @Test
-    @Sql(scripts = "/pedido_pendente_criar_pagamento.sql")
+    @Sql(scripts = { "/limpar_dados.sql", "/pedido_pendente_criar_pagamento.sql" })
     void deveCriarPagamento() {
         Pagamento pagamento = efetuarPagamentoUsecase.criarPagamento(1L);
 
@@ -32,7 +32,7 @@ class EfetuarPagamentoUsecaseIT {
 
 
     @Test
-    @Sql(scripts = "/pedido_pendente_finalizar_pagamento.sql")
+    @Sql(scripts = { "/limpar_dados.sql", "/pedido_pendente_finalizar_pagamento.sql" })
     void deveFinalizarPagamento() {
         Pagamento pagamento = efetuarPagamentoUsecase.finalizarPagamento(1L);
 

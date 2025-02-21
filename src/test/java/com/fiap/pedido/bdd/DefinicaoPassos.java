@@ -10,6 +10,10 @@ import com.fiap.pedido.controller.queue.request.EstoqueDisponivelResponse;
 import com.fiap.pedido.domain.Pagamento;
 import com.fiap.pedido.domain.Pedido;
 import com.fiap.pedido.domain.Produto;
+import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.client.WireMock;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.E;
 import io.cucumber.java.pt.Entao;
@@ -24,6 +28,8 @@ import org.springframework.http.MediaType;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static com.github.tomakehurst.wiremock.client.WireMock.ok;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,6 +40,7 @@ public class DefinicaoPassos {
     private final String endpoint = "http://localhost:8081/api/v1/pedido";
     private Pedido pedido;
     private Pagamento pagamento;
+    private WireMockServer wireMockServer;
 
     @Autowired
     private StreamBridge streamBridge;
@@ -41,12 +48,34 @@ public class DefinicaoPassos {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Before
+    public void setUp() {
+        wireMockServer = new WireMockServer(9191);
+        wireMockServer.start();
+        WireMock.configureFor("localhost", 9191);
+    }
+
+    @After
+    public void tearDown() {
+        wireMockServer.stop();
+    }
+
     @Quando("criar novo pedido")
     @Dado("que exista um pedido")
     public void criarNovoPedido() {
+        String url = String.format("/api/v1/clientes/%s", "000.000.000-00");
+        String clienteJson = """
+                {
+                    "cpf": "000.000.000-00",
+                    "nome": "Leonardo Bortolini",
+                    "cep": "95180-000",
+                    "endereco": "endereco"
+                }
+                """;
+        stubFor(get(urlEqualTo(url)).willReturn(ok(clienteJson).withHeader("Content-Type", "application/json")));
         CriarPedidoJson criarPedidoJson = new CriarPedidoJson();
 
-        criarPedidoJson.setCpf("000.000.000-09");
+        criarPedidoJson.setCpf("000.000.000-00");
         criarPedidoJson.setItens(List.of(new Produto(1L, BigDecimal.TEN, 1)));
 
         Response response = given().contentType(MediaType.APPLICATION_JSON_VALUE).body(criarPedidoJson).when().post(endpoint);

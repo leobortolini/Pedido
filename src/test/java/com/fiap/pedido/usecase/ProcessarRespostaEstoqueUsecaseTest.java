@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -48,10 +49,8 @@ class ProcessarRespostaEstoqueUsecaseTest {
     void deveIgnorarProcessamentoSePedidoNaoForEncontrado() {
         when(pedidoGateway.getPedidoStatus(pedidoId)).thenThrow(new PedidoNaoEncontradoException());
 
-        processarRespostaEstoqueUsecase.processarRespostaEstoque(pedidoId, true);
-
-        verify(pedidoGateway).getPedidoStatus(pedidoId);
-        verifyNoMoreInteractions(pedidoGateway);
+        assertThrows(PedidoNaoEncontradoException.class,
+                () -> processarRespostaEstoqueUsecase.processarRespostaEstoque(pedidoId, true));
     }
 
     @Test
